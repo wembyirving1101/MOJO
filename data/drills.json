@@ -1,0 +1,178 @@
+{
+  "drills": [
+    {
+      "id": "latihan-cepat",
+      "title": "Latihan Cepat",
+      "description": "Pemanasan singkat untuk menjaga pemahamanmu tetap tajam.",
+      "mode": "quick",
+      "color": "mint",
+      "skillId": "persamaan",
+      "subject": "Pengetahuan Kuantitatif",
+      "topic": "Persamaan",
+      "minutes": 3,
+      "xp": 30,
+      "questions": [
+        {
+          "id": "inequality",
+          "text": "Untuk nilai x manakah pertidaksamaan (x − 1)(x + 4) < 0 terpenuhi?",
+          "answers": [
+            "x < −4 atau x > 1",
+            "−4 < x < 1",
+            "x < 1",
+            "x > −4"
+          ],
+          "correct": 1,
+          "explanation": "Titik batasnya −4 dan 1. Hasil perkalian negatif di antara kedua titik tersebut."
+        },
+        {
+          "id": "linear",
+          "text": "Jika 3x + 7 = 22, berapakah nilai x?",
+          "answers": [
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "correct": 2,
+          "explanation": "Kurangi 7 dari kedua ruas: 3x = 15. Bagi dengan 3, sehingga x = 5."
+        },
+        {
+          "id": "brackets",
+          "text": "Berapakah nilai x yang memenuhi 2(x + 3) = 14?",
+          "answers": [
+            "4",
+            "5",
+            "7",
+            "8"
+          ],
+          "correct": 0,
+          "explanation": "Bagi kedua ruas dengan 2: x + 3 = 7. Kurangi 3, sehingga x = 4."
+        }
+      ]
+    },
+    {
+      "id": "latihan-mendalam",
+      "title": "Latihan Mendalam",
+      "description": "Bangun pemahaman persamaan dari konsep dasar sampai penerapannya.",
+      "mode": "deep",
+      "color": "purple",
+      "skillId": "persamaan",
+      "subject": "Pengetahuan Kuantitatif",
+      "topic": "Persamaan",
+      "minutes": 6,
+      "xp": 30,
+      "questions": [
+        {
+          "id": "linear",
+          "text": "Jika 3x + 7 = 22, berapakah nilai x?",
+          "answers": [
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "correct": 2,
+          "explanation": "Kurangi 7 dari kedua ruas: 3x = 15. Bagi dengan 3, sehingga x = 5."
+        },
+        {
+          "id": "brackets",
+          "text": "Berapakah nilai x yang memenuhi 2(x + 3) = 14?",
+          "answers": [
+            "4",
+            "5",
+            "7",
+            "8"
+          ],
+          "correct": 0,
+          "explanation": "Bagi kedua ruas dengan 2: x + 3 = 7. Kurangi 3, sehingga x = 4."
+        },
+        {
+          "id": "fraction",
+          "text": "Jika x/4 + 2 = 5, berapakah nilai x?",
+          "answers": [
+            "8",
+            "10",
+            "12",
+            "20"
+          ],
+          "correct": 2,
+          "explanation": "Kurangi 2: x/4 = 3. Kalikan kedua ruas dengan 4, sehingga x = 12."
+        },
+        {
+          "id": "both-sides",
+          "text": "Jika 5x − 6 = 2x + 9, berapakah nilai x?",
+          "answers": [
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "correct": 2,
+          "explanation": "Pindahkan 2x ke kiri dan −6 ke kanan: 3x = 15. Jadi x = 5."
+        },
+        {
+          "id": "inequality",
+          "text": "Untuk nilai x manakah pertidaksamaan (x − 1)(x + 4) < 0 terpenuhi?",
+          "answers": [
+            "x < −4 atau x > 1",
+            "−4 < x < 1",
+            "x < 1",
+            "x > −4"
+          ],
+          "correct": 1,
+          "explanation": "Titik batasnya −4 dan 1. Hasil perkalian negatif di antara kedua titik tersebut."
+        }
+      ]
+    },
+    {
+      "id": "fokus-kelemahan",
+      "title": "Fokus pada Kelemahan",
+      "description": "Latih kembali tanda negatif dan pertidaksamaan yang sering mengecoh.",
+      "mode": "focus",
+      "color": "peach",
+      "skillId": "persamaan",
+      "subject": "Pengetahuan Kuantitatif",
+      "topic": "Persamaan",
+      "minutes": 4,
+      "xp": 30,
+      "questions": [
+        {
+          "id": "negative",
+          "text": "Jika −2x + 8 = 14, berapakah nilai x?",
+          "answers": [
+            "−3",
+            "3",
+            "−11",
+            "11"
+          ],
+          "correct": 0,
+          "explanation": "Kurangi 8: −2x = 6. Bagi dengan −2, sehingga x = −3."
+        },
+        {
+          "id": "divide-negative",
+          "text": "Himpunan penyelesaian dari −3x > 12 adalah …",
+          "answers": [
+            "x > 4",
+            "x < 4",
+            "x > −4",
+            "x < −4"
+          ],
+          "correct": 3,
+          "explanation": "Saat membagi dengan bilangan negatif, tanda pertidaksamaan dibalik. Jadi x < −4."
+        },
+        {
+          "id": "inequality",
+          "text": "Untuk nilai x manakah pertidaksamaan (x − 1)(x + 4) < 0 terpenuhi?",
+          "answers": [
+            "x < −4 atau x > 1",
+            "−4 < x < 1",
+            "x < 1",
+            "x > −4"
+          ],
+          "correct": 1,
+          "explanation": "Titik batasnya −4 dan 1. Hasil perkalian negatif di antara kedua titik tersebut."
+        }
+      ]
+    }
+  ]
+}

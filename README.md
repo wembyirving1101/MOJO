@@ -11,3 +11,9 @@ Each node has one parent. To add a new subject, add its name to `subjects` and a
 Layout checks: `node --test tests/skill-tree.test.mjs` (Node 22.18+). Tests cover all subjects, collapse/search, 180 added nodes, a 250-level chain, bounds, overlap, duplicate IDs, and cycles.
 
 `npm run build` creates a static export in `out`. AI replies, progress, and practice questions are demonstration data, not connected to a backend.
+
+## Mock drills
+
+Edit `data/drills.json` to add or change drills. The catalog at `/drill` and each session at `/drill/[id]` read this file. Each drill needs a unique URL-safe `id`, title, description, mode, color, skillId, subject, topic, minutes, xp, and a nonempty questions array. Questions contain an id, text, answers, a zero-based `correct` answer index, and an explanation. For example, `correct: 1` marks option B as correct. Each question ID must be unique within its drill.
+
+The page stores choices only for the current session. Refreshing resets it. Edit the JSON and rebuild to add new static drill URLs to the hosted mockup; no API or database is needed.
