@@ -4,3 +4,4 @@ out
 .sites-runtime
 .env*
 *.tsbuildinfo
+.neon
