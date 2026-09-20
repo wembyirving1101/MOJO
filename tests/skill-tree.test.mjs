@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {skillNodes,subjects,visibleTree,layoutTree} from '../lib/skill-tree.ts';
+import {skillNodes,subjects,visibleTree,layoutTree,explorationZoom} from '../lib/skill-tree.ts';
 function checkLayout(nodes){
   const graph=layoutTree(nodes);
   assert.equal(graph.nodes.length,nodes.length);
@@ -38,4 +38,22 @@ test('A deep chain remains navigable and empty filters remain valid',()=>{
 test('Malformed duplicate and cyclic relationships are rejected clearly',()=>{
   assert.throws(()=>layoutTree([skillNodes[0],skillNodes[0]]),/Duplicate/);
   assert.throws(()=>layoutTree([{...skillNodes[0],id:'a',parentId:'b'},{...skillNodes[0],id:'b',parentId:'a'}]),/Cyclic/);
+});
+
+test('Every subject starts at Me and preserves its category below the user',()=>{
+  for(const subject of subjects){
+    const graph=layoutTree(visibleTree(skillNodes,subject,new Set()));
+    assert.equal(graph.nodes[0].name,'Me');
+    assert.equal(graph.nodes[0].kind,'root');
+    if(subject!=='Keseluruhan')assert.ok(graph.edges.some(e=>e.from.id==='mojo'&&e.to.subject===subject));
+  }
+});
+test('Exploration zoom stays readable as trees grow on phone and desktop',()=>{
+  for(const [w,h] of [[320,480],[640,490],[1200,700]]){
+    for(const [gw,gh] of [[320,300],[2400,1000],[50000,50000]]){
+      const scale=explorationZoom(w,h,gw,gh);
+      assert.ok(scale>=.6&&scale<=.85);
+    }
+  }
+  assert.ok(explorationZoom(320,480,2400,1000)<explorationZoom(1200,700,2400,1000));
 });

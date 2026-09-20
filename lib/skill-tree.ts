@@ -10,7 +10,7 @@ export type SkillNode = {
 };
 export const subjects = ['Keseluruhan', 'Kuantitatif', 'Literasi', 'Penalaran', 'Verbal'];
 export const skillNodes: SkillNode[] = [
-  {id:'mojo',name:'Perjalananmu',subject:'Keseluruhan',kind:'root',icon:'sparkles',mastery:61,description:'Jelajahi semua cabang, lalu pilih skill yang ingin kamu pelajari.'},
+  {id:'mojo',name:'Me',subject:'Keseluruhan',kind:'root',icon:'sparkles',mastery:61,description:'Jelajahi semua cabang, lalu pilih skill yang ingin kamu pelajari.'},
   ...['Kuantitatif','Literasi','Penalaran','Verbal'].map((subject,i)=>({id:subject.toLowerCase(),parentId:'mojo',name:subject,subject,kind:'category' as const,icon:['sigma','book','bulb','message'][i],mastery:[61,68,52,63][i],description:`Jelajahi keterkaitan skill dalam ${subject.toLowerCase()}.`})),
   ...[
     ['bilangan','kuantitatif','Bilangan','Kuantitatif','check',100,'Kuasai operasi dan sifat bilangan sebagai fondasi matematika.'],
@@ -48,7 +48,7 @@ export function statusFor(node: SkillNode) {
 }
 
 export function visibleTree(nodes: SkillNode[], subject: string, collapsed: Set<string>, query='') {
-  const scoped=nodes.filter(n=>subject==='Keseluruhan'||n.subject===subject);
+  const scoped=nodes.filter(n=>subject==='Keseluruhan'||n.subject===subject||n.kind==='root');
   const byId=new Map(scoped.map(n=>[n.id,n]));
   const matches=new Set(scoped.filter(n=>n.name.toLocaleLowerCase().includes(query.trim().toLocaleLowerCase())).map(n=>n.id));
   const retained=new Set(matches);
@@ -80,4 +80,9 @@ export function layoutTree(nodes: SkillNode[]) {
   const positions=new Map(positioned.map(n=>[n.id,n]));
   const edges=positioned.filter(n=>n.parentId&&positions.has(n.parentId)).map(n=>({from:positions.get(n.parentId!)!,to:n}));
   return {nodes:positioned,edges,width:Math.max(320,cursor-gap+padding),height:Math.max(300,...positioned.map(n=>n.y+144+padding)),nodeWidth};
+}
+
+// Keep nodes readable in large maps; whole-map fit is a separate explicit action.
+export function explorationZoom(width:number,height:number,graphWidth:number,graphHeight:number){
+  return Math.max(.6,Math.min(.85,(width-48)/Math.min(graphWidth,840),(height-48)/Math.min(graphHeight,600)));
 }
