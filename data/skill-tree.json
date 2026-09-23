@@ -1,0 +1,276 @@
+{
+  "subjects": [
+    "Keseluruhan",
+    "Kuantitatif",
+    "Literasi",
+    "Penalaran",
+    "Verbal"
+  ],
+  "nodes": [
+    {
+      "id": "mojo",
+      "name": "Me",
+      "subject": "Keseluruhan",
+      "kind": "root",
+      "icon": "sparkles",
+      "mastery": 61,
+      "description": "Jelajahi semua cabang, lalu pilih skill yang ingin kamu pelajari."
+    },
+    {
+      "id": "kuantitatif",
+      "parentId": "mojo",
+      "name": "Kuantitatif",
+      "subject": "Kuantitatif",
+      "kind": "category",
+      "icon": "sigma",
+      "mastery": 61,
+      "description": "Jelajahi keterkaitan skill dalam kuantitatif."
+    },
+    {
+      "id": "literasi",
+      "parentId": "mojo",
+      "name": "Literasi",
+      "subject": "Literasi",
+      "kind": "category",
+      "icon": "book",
+      "mastery": 68,
+      "description": "Jelajahi keterkaitan skill dalam literasi."
+    },
+    {
+      "id": "penalaran",
+      "parentId": "mojo",
+      "name": "Penalaran",
+      "subject": "Penalaran",
+      "kind": "category",
+      "icon": "bulb",
+      "mastery": 52,
+      "description": "Jelajahi keterkaitan skill dalam penalaran."
+    },
+    {
+      "id": "verbal",
+      "parentId": "mojo",
+      "name": "Verbal",
+      "subject": "Verbal",
+      "kind": "category",
+      "icon": "message",
+      "mastery": 63,
+      "description": "Jelajahi keterkaitan skill dalam verbal."
+    },
+    {
+      "id": "bilangan",
+      "parentId": "kuantitatif",
+      "name": "Bilangan",
+      "subject": "Kuantitatif",
+      "icon": "check",
+      "mastery": 100,
+      "description": "Kuasai operasi dan sifat bilangan sebagai fondasi matematika."
+    },
+    {
+      "id": "aljabar",
+      "parentId": "bilangan",
+      "name": "Aljabar",
+      "subject": "Kuantitatif",
+      "icon": "x",
+      "mastery": 72,
+      "description": "Kenali pola dan sederhanakan bentuk aljabar."
+    },
+    {
+      "id": "persamaan",
+      "parentId": "aljabar",
+      "name": "Persamaan",
+      "subject": "Kuantitatif",
+      "icon": "equal",
+      "mastery": 45,
+      "description": "Temukan nilai yang belum diketahui, satu langkah setiap hari."
+    },
+    {
+      "id": "fungsi",
+      "parentId": "aljabar",
+      "name": "Fungsi",
+      "subject": "Kuantitatif",
+      "icon": "sigma",
+      "mastery": 0,
+      "description": "Pelajari hubungan antara input dan output."
+    },
+    {
+      "id": "geometri",
+      "parentId": "bilangan",
+      "name": "Geometri",
+      "subject": "Kuantitatif",
+      "icon": "triangle",
+      "mastery": 0,
+      "description": "Jelajahi bentuk, ukuran, dan hubungan dalam ruang."
+    },
+    {
+      "id": "data",
+      "parentId": "bilangan",
+      "name": "Data",
+      "subject": "Kuantitatif",
+      "icon": "chart",
+      "mastery": 0,
+      "description": "Baca data dan temukan pola untuk mengambil kesimpulan."
+    },
+    {
+      "id": "bacaan",
+      "parentId": "literasi",
+      "name": "Pemahaman bacaan",
+      "subject": "Literasi",
+      "icon": "book",
+      "mastery": 100,
+      "description": "Pahami informasi dan konteks dalam sebuah bacaan."
+    },
+    {
+      "id": "ide-pokok",
+      "parentId": "bacaan",
+      "name": "Ide pokok",
+      "subject": "Literasi",
+      "icon": "bulb",
+      "mastery": 78,
+      "description": "Temukan gagasan utama yang menyatukan paragraf."
+    },
+    {
+      "id": "informasi",
+      "parentId": "bacaan",
+      "name": "Informasi rinci",
+      "subject": "Literasi",
+      "icon": "search",
+      "mastery": 64,
+      "description": "Kenali informasi penting yang dinyatakan dalam teks."
+    },
+    {
+      "id": "kesimpulan",
+      "parentId": "ide-pokok",
+      "name": "Kesimpulan",
+      "subject": "Literasi",
+      "icon": "check",
+      "mastery": 40,
+      "description": "Tarik simpulan yang didukung informasi bacaan."
+    },
+    {
+      "id": "inferensi",
+      "parentId": "informasi",
+      "name": "Inferensi",
+      "subject": "Literasi",
+      "icon": "branches",
+      "mastery": 0,
+      "description": "Temukan makna tersirat berdasarkan petunjuk dalam teks."
+    },
+    {
+      "id": "evaluasi",
+      "parentId": "kesimpulan",
+      "name": "Evaluasi teks",
+      "subject": "Literasi",
+      "icon": "target",
+      "mastery": 0,
+      "description": "Nilai kekuatan argumen dan bukti dalam bacaan."
+    },
+    {
+      "id": "logika",
+      "parentId": "penalaran",
+      "name": "Logika dasar",
+      "subject": "Penalaran",
+      "icon": "bulb",
+      "mastery": 100,
+      "description": "Bedakan pernyataan, premis, dan kesimpulan."
+    },
+    {
+      "id": "deduksi",
+      "parentId": "logika",
+      "name": "Deduksi",
+      "subject": "Penalaran",
+      "icon": "branches",
+      "mastery": 66,
+      "description": "Tarik kesimpulan khusus dari aturan umum."
+    },
+    {
+      "id": "induksi",
+      "parentId": "logika",
+      "name": "Induksi",
+      "subject": "Penalaran",
+      "icon": "chart",
+      "mastery": 43,
+      "description": "Temukan pola dari beberapa pengamatan."
+    },
+    {
+      "id": "silogisme",
+      "parentId": "deduksi",
+      "name": "Silogisme",
+      "subject": "Penalaran",
+      "icon": "check",
+      "mastery": 0,
+      "description": "Hubungkan dua premis untuk menarik kesimpulan."
+    },
+    {
+      "id": "pola",
+      "parentId": "induksi",
+      "name": "Pola bilangan",
+      "subject": "Penalaran",
+      "icon": "sigma",
+      "mastery": 0,
+      "description": "Kenali aturan dalam suatu urutan bilangan."
+    },
+    {
+      "id": "analitis",
+      "parentId": "deduksi",
+      "name": "Penalaran analitis",
+      "subject": "Penalaran",
+      "icon": "target",
+      "mastery": 0,
+      "description": "Uraikan persoalan dan hubungkan setiap petunjuk."
+    },
+    {
+      "id": "kosakata",
+      "parentId": "verbal",
+      "name": "Kosakata",
+      "subject": "Verbal",
+      "icon": "message",
+      "mastery": 100,
+      "description": "Perluas pemahaman kata dan penggunaannya."
+    },
+    {
+      "id": "makna",
+      "parentId": "kosakata",
+      "name": "Makna kata",
+      "subject": "Verbal",
+      "icon": "book",
+      "mastery": 75,
+      "description": "Pahami makna kata sesuai konteks kalimat."
+    },
+    {
+      "id": "hubungan",
+      "parentId": "kosakata",
+      "name": "Hubungan kata",
+      "subject": "Verbal",
+      "icon": "branches",
+      "mastery": 48,
+      "description": "Kenali hubungan semantik antar kata."
+    },
+    {
+      "id": "sinonim",
+      "parentId": "makna",
+      "name": "Sinonim & antonim",
+      "subject": "Verbal",
+      "icon": "equal",
+      "mastery": 0,
+      "description": "Bandingkan persamaan dan pertentangan makna."
+    },
+    {
+      "id": "analogi",
+      "parentId": "hubungan",
+      "name": "Analogi",
+      "subject": "Verbal",
+      "icon": "bulb",
+      "mastery": 0,
+      "description": "Temukan hubungan yang setara antar pasangan kata."
+    },
+    {
+      "id": "kalimat",
+      "parentId": "makna",
+      "name": "Kalimat efektif",
+      "subject": "Verbal",
+      "icon": "check",
+      "mastery": 0,
+      "description": "Susun kalimat yang jelas, tepat, dan hemat kata."
+    }
+  ]
+}

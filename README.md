@@ -4,7 +4,9 @@ React + Next.js interactive UTBK prototype. Run `npm install`, then `npm run dev
 
 ## Extending the skill tree
 
-All subjects use `app/skill-map.tsx`. Add a record to `skillNodes` in `lib/skill-tree.ts` with a unique `id`, its existing `parentId`, `subject`, `name`, `icon`, `mastery`, and `description`. Do not add coordinates or connector paths. The renderer derives positions and edges from the parent relationships and recalculates subtree widths and canvas height automatically.
+All subjects use `app/skill-map.tsx`. Edit `data/skill-tree.json`, which contains `subjects` and `nodes`. Add a node with a unique, stable `id`, its existing `parentId`, `subject`, `name`, `icon`, `mastery`, and `description`. The root has `kind: "root"` and no parent; subject categories have `kind: "category"`; ordinary skills omit `kind`. `lib/skill-tree.ts` imports this JSON for the map and subject filters. Do not add coordinates or connector paths. The renderer derives positions and edges from the parent relationships and recalculates subtree widths and canvas height automatically.
+
+`mastery` uses a 0–100 scale and currently contains demonstration values, not individual user records. Keep real user progress separate and associate it with these stable skill IDs when connecting personalization. JSON changes are included on the next build.
 
 Each node has one parent. To add a new subject, add its name to `subjects` and a category node under `mojo`, then add its skills. All subject views, including the overview, start fully expanded. The −/+ controls optionally collapse and expand branches. Search includes matching nodes and their ancestors even within collapsed branches. All views support zoom, fit-to-view, scroll, and mouse dragging; mobile supports touch scrolling.
 

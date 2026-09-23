@@ -1,3 +1,5 @@
+import skillTree from '../data/skill-tree.json' with { type: 'json' };
+
 export type SkillNode = {
   id: string;
   parentId?: string;
@@ -8,37 +10,15 @@ export type SkillNode = {
   mastery: number;
   description: string;
 };
-export const subjects = ['Keseluruhan', 'Kuantitatif', 'Literasi', 'Penalaran', 'Verbal'];
-export const skillNodes: SkillNode[] = [
-  {id:'mojo',name:'Me',subject:'Keseluruhan',kind:'root',icon:'sparkles',mastery:61,description:'Jelajahi semua cabang, lalu pilih skill yang ingin kamu pelajari.'},
-  ...['Kuantitatif','Literasi','Penalaran','Verbal'].map((subject,i)=>({id:subject.toLowerCase(),parentId:'mojo',name:subject,subject,kind:'category' as const,icon:['sigma','book','bulb','message'][i],mastery:[61,68,52,63][i],description:`Jelajahi keterkaitan skill dalam ${subject.toLowerCase()}.`})),
-  ...[
-    ['bilangan','kuantitatif','Bilangan','Kuantitatif','check',100,'Kuasai operasi dan sifat bilangan sebagai fondasi matematika.'],
-    ['aljabar','bilangan','Aljabar','Kuantitatif','x',72,'Kenali pola dan sederhanakan bentuk aljabar.'],
-    ['persamaan','aljabar','Persamaan','Kuantitatif','equal',45,'Temukan nilai yang belum diketahui, satu langkah setiap hari.'],
-    ['fungsi','aljabar','Fungsi','Kuantitatif','sigma',0,'Pelajari hubungan antara input dan output.'],
-    ['geometri','bilangan','Geometri','Kuantitatif','triangle',0,'Jelajahi bentuk, ukuran, dan hubungan dalam ruang.'],
-    ['data','bilangan','Data','Kuantitatif','chart',0,'Baca data dan temukan pola untuk mengambil kesimpulan.'],
-    ['bacaan','literasi','Pemahaman bacaan','Literasi','book',100,'Pahami informasi dan konteks dalam sebuah bacaan.'],
-    ['ide-pokok','bacaan','Ide pokok','Literasi','bulb',78,'Temukan gagasan utama yang menyatukan paragraf.'],
-    ['informasi','bacaan','Informasi rinci','Literasi','search',64,'Kenali informasi penting yang dinyatakan dalam teks.'],
-    ['kesimpulan','ide-pokok','Kesimpulan','Literasi','check',40,'Tarik simpulan yang didukung informasi bacaan.'],
-    ['inferensi','informasi','Inferensi','Literasi','branches',0,'Temukan makna tersirat berdasarkan petunjuk dalam teks.'],
-    ['evaluasi','kesimpulan','Evaluasi teks','Literasi','target',0,'Nilai kekuatan argumen dan bukti dalam bacaan.'],
-    ['logika','penalaran','Logika dasar','Penalaran','bulb',100,'Bedakan pernyataan, premis, dan kesimpulan.'],
-    ['deduksi','logika','Deduksi','Penalaran','branches',66,'Tarik kesimpulan khusus dari aturan umum.'],
-    ['induksi','logika','Induksi','Penalaran','chart',43,'Temukan pola dari beberapa pengamatan.'],
-    ['silogisme','deduksi','Silogisme','Penalaran','check',0,'Hubungkan dua premis untuk menarik kesimpulan.'],
-    ['pola','induksi','Pola bilangan','Penalaran','sigma',0,'Kenali aturan dalam suatu urutan bilangan.'],
-    ['analitis','deduksi','Penalaran analitis','Penalaran','target',0,'Uraikan persoalan dan hubungkan setiap petunjuk.'],
-    ['kosakata','verbal','Kosakata','Verbal','message',100,'Perluas pemahaman kata dan penggunaannya.'],
-    ['makna','kosakata','Makna kata','Verbal','book',75,'Pahami makna kata sesuai konteks kalimat.'],
-    ['hubungan','kosakata','Hubungan kata','Verbal','branches',48,'Kenali hubungan semantik antar kata.'],
-    ['sinonim','makna','Sinonim & antonim','Verbal','equal',0,'Bandingkan persamaan dan pertentangan makna.'],
-    ['analogi','hubungan','Analogi','Verbal','bulb',0,'Temukan hubungan yang setara antar pasangan kata.'],
-    ['kalimat','makna','Kalimat efektif','Verbal','check',0,'Susun kalimat yang jelas, tepat, dan hemat kata.'],
-  ].map(([id,parentId,name,subject,icon,mastery,description])=>({id:String(id),parentId:String(parentId),name:String(name),subject:String(subject),icon:String(icon),mastery:Number(mastery),description:String(description)})),
-];
+// Shared catalog and prototype mastery values; real user progress is separate.
+export const subjects = skillTree.subjects;
+export const skillNodes: SkillNode[] = skillTree.nodes.map(node => {
+  const {kind, ...fields} = node;
+  if (kind !== undefined && kind !== 'root' && kind !== 'category') {
+    throw new Error(`Invalid skill node kind: ${kind}`);
+  }
+  return {...fields, kind};
+});
 
 export function statusFor(node: SkillNode) {
   if(node.kind) return {status:node.kind==='root'?'Peta belajar':'Kelompok materi',color:'mint'};
