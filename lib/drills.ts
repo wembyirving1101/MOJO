@@ -1,10 +1,17 @@
 
 import sql from './db';
 
+export type DrillAnswer = {
+  id: number;
+  text: string;
+  position: number;
+  isCorrect: boolean;
+};
+
 export type DrillQuestion = {
   id: string;
   text: string;
-  answers: string[];
+  answers: DrillAnswer[];
   correct: number;
   explanation: string;
 };
@@ -44,6 +51,7 @@ export async function getDrills(): Promise<Drill[]> {
       q.id AS question_id,
       q.text AS question_text,
       q.explanation,
+      a.id AS answer_id,
       a.position AS answer_position,
       a.answer_text,
       a.is_correct
@@ -94,7 +102,12 @@ export async function getDrills(): Promise<Drill[]> {
       drill.questions.push(question);
     }
 
-    question.answers.push(row.answer_text);
+    question.answers.push({
+      id: Number(row.answer_id),
+      text: row.answer_text,
+      position: row.answer_position,
+      isCorrect: row.is_correct,
+    });
 
     if (row.is_correct) {
       question.correct = row.answer_position;
