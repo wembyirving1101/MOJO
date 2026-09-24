@@ -58,5 +58,17 @@ export function generateQuestion(skillId: string, sequence: number, random = Mat
     const j = int(0, i);
     [choices[i], choices[j]] = [choices[j], choices[i]];
   }
-  return {id: `${skillId}-${sequence}`, text, answers: choices.map(String), correct: choices.indexOf(result), explanation};
+  const correct = choices.indexOf(result);
+  return {
+    id: `${skillId}-${sequence}`,
+    text,
+    answers: choices.map((choice, position) => ({
+      id: sequence * 10 + position,
+      text: String(choice),
+      position,
+      isCorrect: position === correct,
+    })),
+    correct,
+    explanation,
+  };
 }

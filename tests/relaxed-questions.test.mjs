@@ -12,8 +12,9 @@ test('Generated questions have distinct answers and correct arithmetic across th
       const q = generateQuestion(skill, i, random);
       const a = 2 + i % 14, b = 1 + i % 30, x = -15 + i % 41;
       const expected = {bilangan: a * b + x, aljabar: a + b, persamaan: x, fungsi: a * x + b, geometri: a * b, data: b}[skill];
-      assert.equal(Number(q.answers[q.correct]), expected);
-      assert.equal(new Set(q.answers).size, 4);
+      assert.equal(Number(q.answers[q.correct].text), expected);
+      assert.equal(new Set(q.answers.map(answer => answer.text)).size, 4);
+      assert.equal(q.answers.filter(answer => answer.isCorrect).length, 1);
       assert.ok(q.explanation.length > 0);
       texts.add(q.text);
     }

@@ -106,8 +106,8 @@ export async function getDrills(): Promise<Drill[]> {
     question.answers.push({
       id: Number(row.answer_id),
       text: row.answer_text,
-      position: row.answer_position,
-      isCorrect: row.is_correct,
+      position: Number(row.answer_position),
+      isCorrect: Boolean(row.is_correct),
     });
 
     if (row.is_correct) {
