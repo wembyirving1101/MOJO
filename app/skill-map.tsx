@@ -1,7 +1,7 @@
 'use client';
 import {useEffect,useLayoutEffect,useMemo,useRef,useState} from 'react';
 import {BookOpen,MessageCircle,GitFork,Lightbulb,Sigma,ChartNoAxesColumnIncreasing,Equal,Triangle,Sparkles,Check,X,Search,Target,Plus,Minus,Maximize2,LocateFixed} from 'lucide-react';
-import {skillNodes,layoutTree,visibleTree,statusFor,explorationZoom,type SkillNode} from '../lib/skill-tree';
+import {skillNodes,layoutTree,visibleTree,statusFor,explorationZoom,incomingIds,ancestorIds,type SkillNode} from '../lib/skill-tree';
 export const skillIcons = {book:BookOpen,message:MessageCircle,branches:GitFork,bulb:Lightbulb,sigma:Sigma,chart:ChartNoAxesColumnIncreasing,equal:Equal,triangle:Triangle,sparkles:Sparkles,check:Check,x:X,search:Search,target:Target};
 export function iconFor(node:SkillNode){return skillIcons[node.icon as keyof typeof skillIcons]??BookOpen;}
 export default function SkillMap({subject,query,selected,onSelect}:{subject:string;query:string;selected:string;onSelect:(id:string)=>void}){
@@ -20,9 +20,7 @@ export default function SkillMap({subject,query,selected,onSelect}:{subject:stri
   const previousCamera=useRef<{scale:number;offsetX:number;offsetY:number;width:number;height:number}|null>(null);
   const pendingFocus=useRef<string|null>(null);
   const root=graph.nodes.find(n=>n.kind==='root')??graph.nodes[0];
-  const activePath=new Set<string>();
-  let ancestor=graph.nodes.find(n=>n.id===selected);
-  while(ancestor&&!activePath.has(ancestor.id)){activePath.add(ancestor.id);ancestor=graph.nodes.find(n=>n.id===ancestor?.parentId);}
+  const activePath=ancestorIds(graph.nodes,selected);
   function centerNode(id:string,behavior:ScrollBehavior='smooth'){
     const n=graph.nodes.find(n=>n.id===id),e=container.current;
     if(n&&e)e.scrollTo({left:offsetX+n.x*scale-viewport.width/2,top:n.kind==='root'?0:Math.max(0,n.y*scale-viewport.height*.3),behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':behavior});
@@ -47,9 +45,9 @@ export default function SkillMap({subject,query,selected,onSelect}:{subject:stri
     onPointerMove={e=>{if(!pointer.current)return;e.currentTarget.scrollLeft=pointer.current.left-(e.clientX-pointer.current.x);e.currentTarget.scrollTop=pointer.current.top-(e.clientY-pointer.current.y);}}
     onPointerUp={()=>{pointer.current=null;}} onPointerCancel={()=>{pointer.current=null;}}>
     <div className="graph-scroll-space" style={{width,height}}><div className="graph-surface" style={{width:graph.width,height:graph.height,transform:`translate(${offsetX}px,${offsetY}px) scale(${scale})`}}>
-    <svg className="graph-edges" width={graph.width} height={graph.height} aria-hidden="true">{graph.edges.map(({from,to})=>{const sy=from.y+110,ty=to.y,mid=(sy+ty)/2;return <path key={to.id} className={activePath.has(to.id)?'travel-edge':to.mastery>0?'learned-edge':''} d={`M ${from.x} ${sy} C ${from.x} ${mid}, ${to.x} ${mid}, ${to.x} ${ty}`}/>;})}</svg>
-    {graph.nodes.map(node=>{const Icon=iconFor(node),state=statusFor(node);const children=skillNodes.filter(n=>n.parentId===node.id);return <div className={`graph-node ${state.color} ${node.kind??''} ${selected===node.id?'is-selected':''}`} style={{left:node.x-72,top:node.y}} key={node.id}>
-      <button className="graph-select" onClick={()=>{onSelect(node.id);centerNode(node.id)}} title={node.name} aria-pressed={selected===node.id} aria-label={`${node.name} — ${state.status}`}><span className="graph-disc"><Icon size={29} strokeWidth={2.6}/></span><span className="graph-label">{node.name}</span>{selected===node.id&&<span className="traveler-label">Kamu di sini</span>}</button>
+    <svg className="graph-edges" width={graph.width} height={graph.height} aria-hidden="true"><defs><marker id="skill-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#82b89e" stroke="none"/></marker></defs>{graph.edges.map(({from,to})=>{const sy=from.y+110,ty=to.y,mid=(sy+ty)/2;return <path markerEnd="url(#skill-arrow)" key={`${from.id}-${to.id}`} className={activePath.has(to.id)&&activePath.has(from.id)?'travel-edge':to.mastery>0?'learned-edge':''} d={`M ${from.x} ${sy} C ${from.x} ${mid}, ${to.x} ${mid}, ${to.x} ${ty}`}/>;})}</svg>
+    {graph.nodes.map(node=>{const Icon=iconFor(node),state=statusFor(node);const children=visibleTree(skillNodes,subject,new Set()).filter(n=>incomingIds(n).includes(node.id));return <div className={`graph-node ${state.color} ${node.kind??''} ${incomingIds(node).length>1?'multi-requirement':''} ${selected===node.id?'is-selected':''}`} style={{left:node.x-72,top:node.y}} key={node.id}>
+      <button className="graph-select" onClick={()=>{onSelect(node.id);centerNode(node.id)}} title={node.name} aria-pressed={selected===node.id} aria-label={`${node.name} — ${state.status}`}><span className="graph-disc"><Icon size={20} strokeWidth={2}/></span><span className="graph-label">{node.name}</span>{selected===node.id&&<span className="traveler-label">Kamu di sini</span>}</button>
       {children.length>0&&<button className="branch-toggle" aria-label={`${collapsed.has(node.id)?'Buka':'Tutup'} cabang ${node.name}`} aria-expanded={!collapsed.has(node.id)} onClick={()=>setCollapsed(old=>{const next=new Set(old);if(next.has(node.id))next.delete(node.id);else next.add(node.id);return next;})}>{collapsed.has(node.id)?<Plus size={13}/>:<Minus size={13}/>}<span>{children.length}</span></button>}
     </div>;})}</div></div>
     {!matchingCount&&<div className="graph-empty">Tidak ada skill “{query}”. Coba kata lain.</div>}

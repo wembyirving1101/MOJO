@@ -21,8 +21,8 @@ test('Generated questions have distinct answers and correct arithmetic across th
     assert.ok(texts.size > 100, skill);
   }
 });
-test('Relaxed scope supports all quantitative skills without a database question pool', () => {
-  assert.deepEqual(relaxedDrill('kuantitatif').generatedSkillIds, generatedSkills);
+test('Relaxed scope supports authored quantitative skills without a database question pool', () => {
+  assert.deepEqual(new Set(relaxedDrill('kuantitatif').generatedSkillIds), new Set(generatedSkills));
   assert.deepEqual(relaxedDrill('kuantitatif', 'persamaan').generatedSkillIds, ['persamaan']);
   assert.equal(relaxedDrill('kuantitatif', 'deduksi'), undefined);
   assert.equal(relaxedDrill('literasi'), undefined);

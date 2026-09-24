@@ -57,60 +57,6 @@
       "description": "Jelajahi keterkaitan skill dalam verbal."
     },
     {
-      "id": "bilangan",
-      "parentId": "kuantitatif",
-      "name": "Bilangan",
-      "subject": "Kuantitatif",
-      "icon": "check",
-      "mastery": 100,
-      "description": "Kuasai operasi dan sifat bilangan sebagai fondasi matematika."
-    },
-    {
-      "id": "aljabar",
-      "parentId": "bilangan",
-      "name": "Aljabar",
-      "subject": "Kuantitatif",
-      "icon": "x",
-      "mastery": 72,
-      "description": "Kenali pola dan sederhanakan bentuk aljabar."
-    },
-    {
-      "id": "persamaan",
-      "parentId": "aljabar",
-      "name": "Persamaan",
-      "subject": "Kuantitatif",
-      "icon": "equal",
-      "mastery": 45,
-      "description": "Temukan nilai yang belum diketahui, satu langkah setiap hari."
-    },
-    {
-      "id": "fungsi",
-      "parentId": "aljabar",
-      "name": "Fungsi",
-      "subject": "Kuantitatif",
-      "icon": "sigma",
-      "mastery": 0,
-      "description": "Pelajari hubungan antara input dan output."
-    },
-    {
-      "id": "geometri",
-      "parentId": "bilangan",
-      "name": "Geometri",
-      "subject": "Kuantitatif",
-      "icon": "triangle",
-      "mastery": 0,
-      "description": "Jelajahi bentuk, ukuran, dan hubungan dalam ruang."
-    },
-    {
-      "id": "data",
-      "parentId": "bilangan",
-      "name": "Data",
-      "subject": "Kuantitatif",
-      "icon": "chart",
-      "mastery": 0,
-      "description": "Baca data dan temukan pola untuk mengambil kesimpulan."
-    },
-    {
       "id": "bacaan",
       "parentId": "literasi",
       "name": "Pemahaman bacaan",
@@ -271,6 +217,254 @@
       "icon": "check",
       "mastery": 0,
       "description": "Susun kalimat yang jelas, tepat, dan hemat kata."
+    },
+    {
+      "id": "data",
+      "parentId": "kuantitatif",
+      "name": "Data & Peluang",
+      "subject": "Kuantitatif",
+      "icon": "chart",
+      "mastery": 0,
+      "description": "Baca data dan temukan pola untuk mengambil kesimpulan.",
+      "prerequisiteIds": [
+        "kuantitatif"
+      ]
+    },
+    {
+      "id": "bilangan",
+      "parentId": "kuantitatif",
+      "name": "Bilangan",
+      "subject": "Kuantitatif",
+      "icon": "sigma",
+      "mastery": 100,
+      "description": "Kuasai operasi dan sifat bilangan sebagai fondasi matematika.",
+      "prerequisiteIds": [
+        "kuantitatif"
+      ]
+    },
+    {
+      "id": "geometri",
+      "parentId": "kuantitatif",
+      "name": "Geometri",
+      "subject": "Kuantitatif",
+      "icon": "triangle",
+      "mastery": 0,
+      "description": "Jelajahi bentuk, ukuran, dan hubungan dalam ruang.",
+      "prerequisiteIds": [
+        "kuantitatif"
+      ]
+    },
+    {
+      "id": "interpretasi-data",
+      "subject": "Kuantitatif",
+      "mastery": 0,
+      "description": "Pelajari interpretasi data dan hubungannya dengan materi lain.",
+      "name": "Interpretasi Data",
+      "parentId": "data",
+      "prerequisiteIds": [
+        "data"
+      ],
+      "icon": "chart"
+    },
+    {
+      "id": "operasi-peluang",
+      "subject": "Kuantitatif",
+      "mastery": 0,
+      "description": "Pelajari operasi peluang dan hubungannya dengan materi lain.",
+      "name": "Operasi Peluang",
+      "parentId": "data",
+      "prerequisiteIds": [
+        "data"
+      ],
+      "icon": "sigma"
+    },
+    {
+      "id": "faktorial",
+      "subject": "Kuantitatif",
+      "mastery": 0,
+      "description": "Pelajari faktorial dan hubungannya dengan materi lain.",
+      "name": "Faktorial",
+      "parentId": "bilangan",
+      "prerequisiteIds": [
+        "bilangan"
+      ],
+      "icon": "sigma"
+    },
+    {
+      "id": "eksponen-akar",
+      "subject": "Kuantitatif",
+      "mastery": 0,
+      "description": "Pelajari eksponen dan akar dan hubungannya dengan materi lain.",
+      "name": "Eksponen dan Akar",
+      "parentId": "bilangan",
+      "prerequisiteIds": [
+        "bilangan"
+      ],
+      "icon": "sigma"
+    },
+    {
+      "id": "aljabar",
+      "parentId": "bilangan",
+      "name": "Aljabar",
+      "subject": "Kuantitatif",
+      "icon": "x",
+      "mastery": 72,
+      "description": "Kenali pola dan sederhanakan bentuk aljabar.",
+      "prerequisiteIds": [
+        "bilangan"
+      ]
+    },
+    {
+      "id": "pengukuran-dasar",
+      "subject": "Kuantitatif",
+      "mastery": 0,
+      "description": "Pelajari pengukuran dasar dan hubungannya dengan materi lain.",
+      "name": "Pengukuran Dasar",
+      "parentId": "geometri",
+      "prerequisiteIds": [
+        "geometri",
+        "bilangan"
+      ],
+      "icon": "triangle"
+    },
+    {
+      "id": "segitiga",
+      "subject": "Kuantitatif",
+      "mastery": 0,
+      "description": "Pelajari segitiga dan hubungannya dengan materi lain.",
+      "name": "Segitiga",
+      "parentId": "geometri",
+      "prerequisiteIds": [
+        "geometri"
+      ],
+      "icon": "triangle"
+    },
+    {
+      "id": "lingkaran",
+      "subject": "Kuantitatif",
+      "mastery": 0,
+      "description": "Pelajari lingkaran dan hubungannya dengan materi lain.",
+      "name": "Lingkaran",
+      "parentId": "geometri",
+      "prerequisiteIds": [
+        "geometri"
+      ],
+      "icon": "triangle"
+    },
+    {
+      "id": "grafik",
+      "subject": "Kuantitatif",
+      "mastery": 0,
+      "description": "Pelajari grafik dan hubungannya dengan materi lain.",
+      "name": "Grafik",
+      "parentId": "interpretasi-data",
+      "prerequisiteIds": [
+        "interpretasi-data"
+      ],
+      "icon": "chart"
+    },
+    {
+      "id": "permutasi-kombinasi",
+      "subject": "Kuantitatif",
+      "mastery": 0,
+      "description": "Pelajari permutasi & kombinasi dan hubungannya dengan materi lain.",
+      "name": "Permutasi & Kombinasi",
+      "parentId": "faktorial",
+      "prerequisiteIds": [
+        "faktorial",
+        "data"
+      ],
+      "icon": "branches"
+    },
+    {
+      "id": "persamaan",
+      "parentId": "aljabar",
+      "name": "Persamaan dan Pertidaksamaan Linear",
+      "subject": "Kuantitatif",
+      "icon": "equal",
+      "mastery": 45,
+      "description": "Temukan nilai yang belum diketahui, satu langkah setiap hari.",
+      "prerequisiteIds": [
+        "aljabar"
+      ]
+    },
+    {
+      "id": "fungsi",
+      "parentId": "aljabar",
+      "name": "Fungsi",
+      "subject": "Kuantitatif",
+      "icon": "sigma",
+      "mastery": 0,
+      "description": "Pelajari hubungan antara input dan output.",
+      "prerequisiteIds": [
+        "aljabar"
+      ]
+    },
+    {
+      "id": "peluang-lanjutan",
+      "subject": "Kuantitatif",
+      "mastery": 0,
+      "description": "Pelajari operasi peluang lanjutan dan hubungannya dengan materi lain.",
+      "name": "Operasi Peluang Lanjutan",
+      "parentId": "operasi-peluang",
+      "prerequisiteIds": [
+        "operasi-peluang",
+        "permutasi-kombinasi"
+      ],
+      "icon": "branches"
+    },
+    {
+      "id": "persamaan-kuadrat",
+      "subject": "Kuantitatif",
+      "mastery": 0,
+      "description": "Pelajari persamaan dan pertidaksamaan kuadrat dan hubungannya dengan materi lain.",
+      "name": "Persamaan dan Pertidaksamaan Kuadrat",
+      "parentId": "eksponen-akar",
+      "prerequisiteIds": [
+        "eksponen-akar",
+        "persamaan"
+      ],
+      "icon": "equal"
+    },
+    {
+      "id": "luas-bangun-datar",
+      "subject": "Kuantitatif",
+      "mastery": 0,
+      "description": "Pelajari luas bangun datar dan hubungannya dengan materi lain.",
+      "name": "Luas Bangun Datar",
+      "parentId": "pengukuran-dasar",
+      "prerequisiteIds": [
+        "pengukuran-dasar",
+        "persamaan"
+      ],
+      "icon": "triangle"
+    },
+    {
+      "id": "kalkulus",
+      "subject": "Kuantitatif",
+      "mastery": 0,
+      "description": "Pelajari kalkulus dan hubungannya dengan materi lain.",
+      "name": "Kalkulus",
+      "parentId": "grafik",
+      "prerequisiteIds": [
+        "grafik",
+        "persamaan-kuadrat"
+      ],
+      "icon": "sigma"
+    },
+    {
+      "id": "trigonometri",
+      "subject": "Kuantitatif",
+      "mastery": 0,
+      "description": "Pelajari trigonometri dan hubungannya dengan materi lain.",
+      "name": "Trigonometri",
+      "parentId": "segitiga",
+      "prerequisiteIds": [
+        "segitiga",
+        "luas-bangun-datar",
+        "persamaan-kuadrat"
+      ],
+      "icon": "triangle"
     }
   ]
 }

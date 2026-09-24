@@ -41,3 +41,23 @@
 .catalog-empty{padding:26px 12px;text-align:center;color:var(--muted);line-height:1.7}.picker-back{display:flex;gap:8px;align-items:center;background:none;border:0;color:var(--mint);padding:0;margin-bottom:20px}.picker-copy{color:var(--muted);margin-bottom:22px}.overall-summary{display:flex;flex-wrap:wrap;gap:16px;padding:20px;background:var(--panel-raised);border-radius:12px;margin-bottom:20px}.overall-summary strong{color:var(--mint)}
 @media(max-width:760px){.subject-card-grid{grid-template-columns:1fr;gap:16px}.subject-card{min-height:240px;padding:24px}.subject-card h2{font-size:26px}.picker-content{padding:22px 18px}.picker-header h2{font-size:24px}.catalog-filters button{padding:10px 20px}.overall-option{padding:16px 12px;gap:10px}}
 .subject-skill-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.catalog-session-note{color:var(--muted);font-size:13px;line-height:1.7;margin-top:24px}.drill-card>button.primary{margin-top:auto}.drill-card>.muted{margin-bottom:18px}@media(max-width:760px){.subject-skill-grid{grid-template-columns:1fr}}
+
+/* Flowchart cards keep merged prerequisites readable at branch junctions. */
+.graph-node .graph-select{height:110px;border:1px solid #687b73;border-radius:16px;background:#25352f;justify-content:center;gap:7px;padding:10px 12px}
+.graph-node .graph-disc,.graph-node.root .graph-disc,.graph-node.category .graph-disc{width:25px;height:25px;border:0;border-radius:0;background:transparent;color:var(--mint);box-shadow:none}
+.graph-node .graph-label{font-size:12px;line-height:16px;min-height:0;max-width:120px}
+.graph-node.category .graph-select{border-radius:3px;background:#2b3834}
+.graph-node.root .graph-select{border-radius:20px;background:#304c3e;border-color:var(--mint)}
+.graph-node.multi-requirement .graph-select{border-radius:42px;background:#293d37}
+.graph-node.is-selected .graph-select{outline:2px solid var(--mint);outline-offset:4px}
+.graph-node.is-selected .graph-disc{outline:0;box-shadow:none}
+.graph-node .branch-toggle{top:96px;right:8px}
+.skill-requirements{display:flex;flex-direction:column;gap:8px;margin:18px 0;font-size:12px}
+.skill-requirements>strong{color:var(--muted);font-weight:500}
+.skill-requirements button{display:flex;justify-content:space-between;gap:10px;text-align:left;padding:10px;border:1px solid var(--line);border-radius:8px;background:transparent;color:inherit;font:inherit}
+.skill-requirements button:hover{border-color:var(--mint)}
+.skill-requirements button span{color:var(--mint);white-space:nowrap}
+.graph-node.gray .graph-select{background:#2c343e;border-color:#687687}
+.graph-node.peach .graph-select{background:#503e32;border-color:var(--peach)}
+.graph-node.peach .graph-disc{color:var(--peach)}
+.graph-node.gray .graph-disc{color:#aebbc6}

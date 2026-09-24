@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {skillNodes,subjects,visibleTree,layoutTree,explorationZoom} from '../lib/skill-tree.ts';
+import {skillNodes,subjects,visibleTree,layoutTree,explorationZoom,incomingIds,ancestorIds} from '../lib/skill-tree.ts';
 function checkLayout(nodes){
   const graph=layoutTree(nodes);
   assert.equal(graph.nodes.length,nodes.length);
@@ -9,18 +9,18 @@ function checkLayout(nodes){
     const a=graph.nodes[i],b=graph.nodes[j];
     assert.ok(Math.abs(a.y-b.y)>=110||Math.abs(a.x-b.x)>=144,`Overlap: ${a.id}, ${b.id}`);
   }
-  for(const {from,to} of graph.edges){assert.equal(to.parentId,from.id);assert.ok(from.y+110<to.y);}
+  for(const {from,to} of graph.edges){assert.ok(incomingIds(to).includes(from.id));assert.ok(from.y+110<to.y);}
   return graph;
 }
 test('Every subject and overview use valid connected trees',()=>{
-  for(const subject of subjects){const nodes=visibleTree(skillNodes,subject,new Set());const graph=checkLayout(nodes);assert.equal(graph.edges.length,nodes.length-1);}
+  for(const subject of subjects){const nodes=visibleTree(skillNodes,subject,new Set());const graph=checkLayout(nodes);assert.ok(graph.edges.length>=nodes.length-1);}
 });
 test('Overview collapse hides descendants; search reveals matching ancestry',()=>{
-  const hidden=new Set(['bilangan','bacaan','logika','kosakata']);
+  const hidden=new Set(['kuantitatif','bacaan','logika','kosakata']);
   const overview=visibleTree(skillNodes,'Keseluruhan',hidden);
-  assert.equal(overview.length,9);
-  const found=visibleTree(skillNodes,'Keseluruhan',hidden,'persamaan');
-  assert.deepEqual(found.map(n=>n.id),['mojo','kuantitatif','bilangan','aljabar','persamaan']);
+  assert.equal(overview.length,8);
+  const found=visibleTree(skillNodes,'Keseluruhan',hidden,'persamaan dan pertidaksamaan linear');
+  assert.deepEqual(new Set(found.map(n=>n.id)),new Set(['mojo','kuantitatif','bilangan','aljabar','persamaan']));
   assert.equal(visibleTree(skillNodes,'Literasi',new Set(),'persamaan').length,0);
   checkLayout(overview);checkLayout(found);
 });
@@ -46,6 +46,7 @@ test('Every subject starts at Me and preserves its category below the user',()=>
     assert.equal(graph.nodes[0].name,'Me');
     assert.equal(graph.nodes[0].kind,'root');
     if(subject!=='Keseluruhan')assert.ok(graph.edges.some(e=>e.from.id==='mojo'&&e.to.subject===subject));
+    if(subject==='Kuantitatif')assert.deepEqual(graph.edges.filter(e=>e.from.id==='mojo').map(e=>e.to.id).sort(),['bilangan','data','geometri']);
   }
 });
 test('Exploration zoom stays readable as trees grow on phone and desktop',()=>{
@@ -56,4 +57,28 @@ test('Exploration zoom stays readable as trees grow on phone and desktop',()=>{
     }
   }
   assert.ok(explorationZoom(320,480,2400,1000)<explorationZoom(1200,700,2400,1000));
+});
+
+
+test('Merged skills render every required edge once and sit below all prerequisites',()=>{
+  const graph=checkLayout(skillNodes);
+  for(const id of ['permutasi-kombinasi','pengukuran-dasar','persamaan-kuadrat','luas-bangun-datar','kalkulus','trigonometri']){
+    const node=skillNodes.find(n=>n.id===id);
+    assert.ok(node.prerequisiteIds.length>=2);
+    assert.deepEqual(new Set(graph.edges.filter(e=>e.to.id===id).map(e=>e.from.id)),new Set(node.prerequisiteIds));
+    assert.equal(graph.nodes.filter(n=>n.id===id).length,1);
+  }
+});
+test('Search and selection include both branches of a merged prerequisite',()=>{
+  const ids=new Set(visibleTree(skillNodes,'Kuantitatif',new Set(['bilangan']),'permutasi').map(n=>n.id));
+  for(const id of ['permutasi-kombinasi','faktorial','bilangan','data','mojo'])assert.ok(ids.has(id));
+  const ancestors=ancestorIds(skillNodes,'permutasi-kombinasi');ancestors.delete('kuantitatif');assert.deepEqual(ids,ancestors);
+});
+test('Collapsing one branch keeps shared descendants accessible through another',()=>{
+  assert.ok(visibleTree(skillNodes,'Kuantitatif',new Set(['faktorial'])).some(n=>n.id==='permutasi-kombinasi'));
+  assert.ok(!visibleTree(skillNodes,'Kuantitatif',new Set(['faktorial','data'])).some(n=>n.id==='permutasi-kombinasi'));
+});
+test('Cycles through secondary prerequisites are rejected',()=>{
+  const base={...skillNodes[0],kind:undefined};
+  assert.throws(()=>layoutTree([{...base,id:'a',prerequisiteIds:['b']},{...base,id:'b',prerequisiteIds:['root','a']},{...base,id:'root'}]),/Cyclic/);
 });
