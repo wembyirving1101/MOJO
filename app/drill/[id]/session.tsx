@@ -15,8 +15,33 @@ import {
 } from 'lucide-react';
 
 import type { Drill } from '../../../lib/drills';
+import RelaxedSession from '../relaxed-session';
+import { generatedSkills } from '../../../lib/relaxed-questions';
 
-export default function DrillSession({ drill }: { drill: Drill }) {
+export default function DrillSession(props: { drill: Drill; recordAttempt?: boolean }) {
+  const pool = props.drill.generatedSkillIds
+    ?? (generatedSkills.includes(props.drill.skillId) ? [props.drill.skillId] : []);
+
+  if (props.drill.mode === 'quick' && pool.length) {
+    return (
+      <RelaxedSession
+        skillIds={pool}
+        topic={props.drill.topic}
+        subject={props.drill.subject}
+      />
+    );
+  }
+
+  return <FiniteDrillSession {...props} />;
+}
+
+function FiniteDrillSession({
+  drill,
+  recordAttempt = true,
+}: {
+  drill: Drill;
+  recordAttempt?: boolean;
+}) {
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, number>>({});
   const [checked, setChecked] = useState<Record<string, boolean>>({});
@@ -40,7 +65,7 @@ export default function DrillSession({ drill }: { drill: Drill }) {
   }, [index, finished]);
 
   useEffect(() => {
-    if (attemptStarted.current) return;
+    if (!recordAttempt || attemptStarted.current) return;
 
     attemptStarted.current = true;
 
@@ -72,7 +97,7 @@ export default function DrillSession({ drill }: { drill: Drill }) {
     }
 
     startAttempt();
-  }, [drill.id]);
+  }, [drill.id, recordAttempt]);
 
   function restart() {
     setIndex(0);
@@ -82,6 +107,8 @@ export default function DrillSession({ drill }: { drill: Drill }) {
   }
 
   async function saveAnswer() {
+  if (!recordAttempt) return;
+
   const selectedPosition = answers[question.id];
 
   if (selectedPosition === undefined) {
@@ -129,6 +156,8 @@ export default function DrillSession({ drill }: { drill: Drill }) {
 }
 
 async function completeAttempt() {
+  if (!recordAttempt) return;
+
   if (attemptId === null) {
     console.error('Attempt belum tersedia');
     return;

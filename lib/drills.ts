@@ -28,6 +28,7 @@ export type Drill = {
   minutes: number;
   xp: number;
   questions: DrillQuestion[];
+  generatedSkillIds?: string[];
 };
 
 // Temporary: masih dipakai oleh halaman yang belum dipindahkan ke DB
