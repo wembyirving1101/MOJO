@@ -61,3 +61,14 @@
 .graph-node.peach .graph-select{background:#503e32;border-color:var(--peach)}
 .graph-node.peach .graph-disc{color:var(--peach)}
 .graph-node.gray .graph-disc{color:#aebbc6}
+
+.home-guide{text-align:left;margin-top:32px;padding:28px;background:var(--panel);border:1px solid var(--line);border-radius:20px}
+.home-guide h2{font-size:23px}.guide-intro{color:var(--muted);font-size:14px;margin-top:8px}
+.guide-steps{list-style:none;padding:0;margin:8px 0 0}.guide-steps li{display:flex;gap:18px;padding:24px 0;border-bottom:1px solid var(--line)}.guide-steps li:last-child{padding-bottom:0;border-bottom:0}
+.guide-number{display:flex;align-items:center;justify-content:center;flex-shrink:0;width:38px;height:38px;border-radius:12px;background:#304c3e;color:var(--mint);font-size:13px;font-weight:700}
+.guide-steps h3{font-size:17px;margin:3px 0 9px}.guide-steps p{color:var(--muted);font-size:14px;line-height:1.75}.guide-steps strong{color:var(--text);font-weight:500}
+.guide-link{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:8px 0;border:0;background:transparent;color:var(--mint);font:inherit;font-size:14px;text-decoration:none}.guide-link:hover{text-decoration:underline}.guide-note{display:block;color:var(--muted);font-size:12px;line-height:1.6;margin-top:12px}
+.home-ai-note{display:flex;gap:12px;align-items:flex-start;text-align:left;margin-top:20px;padding:18px 22px;border:1px solid var(--line);border-radius:14px;color:var(--muted)}.home-ai-note svg{flex-shrink:0;color:var(--mint)}.home-ai-note p{font-size:13px;line-height:1.7}.home-ai-note strong{color:var(--text);font-weight:500}
+.ai-availability{margin-top:28px;padding:28px;border:1px solid var(--line);border-radius:18px;background:var(--panel)}.ai-availability h2{font-size:22px;margin:18px 0 12px}.ai-availability p{color:var(--muted);line-height:1.75;font-size:14px;margin-bottom:22px}.ai-availability .primary{display:inline-flex;gap:12px;width:auto}
+.ai-composer{display:flex;gap:10px;margin-top:20px;padding:10px;border:1px solid var(--line);border-radius:14px;background:var(--panel);opacity:.55}.ai-composer input{flex:1}.ai-composer .primary{width:48px;flex-shrink:0}.ai-composer button,.ai-composer input{cursor:not-allowed}
+@media(max-width:760px){.home-guide{padding:20px}.guide-steps li{gap:12px}.guide-steps p{font-size:13px}.ai-availability{padding:23px 20px}}
